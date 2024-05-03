@@ -1,43 +1,69 @@
-import React, { useState, FormEvent } from 'react';
+// src/components/TaskForm.tsx
+import React, { useState, useEffect } from 'react';
+import { Button, TextField, Grid, Paper, Typography } from '@mui/material';
 
 interface TaskFormProps {
-    onSubmit: (task: { title: string; description: string }) => void;
-    initialData?: { title: string; description: string };
+    onSubmit: (taskData: { title: string; description: string }) => void;
+    initialData?: { id?: string; title: string; description: string };
 }
 
 const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialData }) => {
-    const [title, setTitle] = useState(initialData?.title || '');
-    const [description, setDescription] = useState(initialData?.description || '');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
-    const handleSubmit = (event: FormEvent) => {
+    useEffect(() => {
+        if (initialData) {
+            setTitle(initialData.title);
+            setDescription(initialData.description);
+        }
+    }, [initialData]);
+
+    const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        onSubmit({ title, description });
-        setTitle(''); 
-        setDescription(''); 
+        onSubmit({
+            title,
+            description
+        });
+        setTitle('');
+        setDescription('');
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="title">Título:</label>
-                <input
-                    id="title"
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label htmlFor="description">Descrição:</label>
-                <textarea
-                    id="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-            </div>
-            <button type="submit">Salvar Tarefa</button>
-        </form>
+        <Paper style={{ padding: 16 }}>
+            <Typography variant="h6">{initialData ? 'Edit Task' : 'Add Task'}</Typography>
+            <form onSubmit={handleSubmit} noValidate autoComplete="off">
+                <Grid container alignItems="flex-start" spacing={2}>
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Title"
+                            fullWidth
+                            required
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Description"
+                            fullWidth
+                            multiline
+                            minRows={3}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </Grid>
+                    <Grid item style={{ marginTop: 16 }}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                        >
+                            {initialData ? 'Update Task' : 'Add Task'}
+                        </Button>
+                    </Grid>
+                </Grid>
+            </form>
+        </Paper>
     );
 };
 

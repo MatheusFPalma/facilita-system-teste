@@ -1,24 +1,16 @@
 import React from 'react';
 
-interface Task {
-    id: string;
-    title: string;
-    description?: string;
-}
-
 interface TaskItemProps {
-    task: Task;
-    onEdit: (id: string) => void;
+    task: { id: string; title: string; description?: string };
     onDelete: (id: string) => void;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete }) => {
+const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete }) => {
     return (
         <li>
-            <h2>{task.title}</h2>
+            <h3>{task.title}</h3>
             <p>{task.description}</p>
-            <button onClick={() => onEdit(task.id)}>Editar</button>
-            <button onClick={() => onDelete(task.id)}>Excluir</button>
+            <button onClick={() => onDelete(task.id)}>Delete</button>
         </li>
     );
 };

@@ -1,34 +1,47 @@
 import React from 'react';
-import TaskItem from './TaskItem';
+import useTaskForm from '../hooks/useTasksForm';
 
-interface Task {
-    id: string;
-    title: string;
-    description?: string;
+interface TaskFormProps {
+    initialData?: { id?: string; title: string; description?: string };
+    onSubmit: (taskData: { title: string; description: string }) => void;
 }
 
-interface TaskListProps {
-    tasks: Task[];
-    onEdit: (id: string) => void;
-    onDelete: (id: string) => void;
-}
+const TaskForm: React.FC<TaskFormProps> = ({ initialData = { title: '', description: '' }, onSubmit }) => {
+    const { formState, handleChange, handleSubmit } = useTaskForm(initialData);
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, onEdit, onDelete }) => {
+    const submitForm = () => {
+        const taskData = {
+            title: formState.title,
+            description: formState.description || ''
+        };
+        onSubmit(taskData);
+    };
+
     return (
-        <div>
-            <h1>Lista de Tarefas</h1>
-            {tasks.length > 0 ? (
-                <ul>
-                    {tasks.map((task) => (
-                        <TaskItem key={task.id} task={task} onEdit={onEdit} onDelete={onDelete} />
-                    ))}
-                </ul>
-            ) : (
-                <p>Não há tarefas cadastradas.</p>
-            )}
-        </div>
+        <form onSubmit={(e) => { e.preventDefault(); handleSubmit(submitForm); }}>
+            <div>
+                <label htmlFor="title">Title:</label>
+                <input
+                    id="title"
+                    name="title"
+                    type="text"
+                    value={formState.title}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+            <div>
+                <label htmlFor="description">Description:</label>
+                <textarea
+                    id="description"
+                    name="description"
+                    value={formState.description}
+                    onChange={handleChange}
+                />
+            </div>
+            <button type="submit">Save Task</button>
+        </form>
     );
 };
 
-export default TaskList;
-
+export default TaskForm;

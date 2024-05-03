@@ -1,24 +1,36 @@
 import React from 'react';
-import './App.css';
+import TaskList from './components/TaskList';
+import TaskForm from './components/TaskForm';
+import { Container, AppBar, Toolbar, Typography, Grid } from '@mui/material';
 
-function App() {
+const App: React.FC = () => {
+  const handleFormSubmit = (taskData: { title: string; description?: string }) => {
+    console.log('Task Submitted:', taskData);
+    // logica do backend
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="md">
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Task Manager
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Grid container spacing={3} style={{ marginTop: '20px' }}>
+        <Grid item xs={12} md={6}>
+          {/* Passando handleFormSubmit para onSubmit */}
+          <TaskForm onSubmit={handleFormSubmit} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TaskList onSubmit={function (taskData: { title: string; description: string; }): void {
+            throw new Error('Function not implemented.');
+          } } />
+        </Grid>
+      </Grid>
+    </Container>
   );
-}
+};
 
 export default App;
