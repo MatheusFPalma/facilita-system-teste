@@ -1,46 +1,53 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Task Manager Frontend
 
-## Available Scripts
+## Introdução
 
-In the project directory, you can run:
+Este é o frontend do sistema de gerenciamento de tarefas, construído em React com TypeScript. Ele permite que os usuários criem, visualizem, editem e excluam tarefas.
 
-### `npm start`
+## Configuração
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. **Clone o repositório:**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+   ```bash
+   git clone <url-do-repositorio>
+   cd <nome-do-repositorio>
+   ```
 
-### `npm test`
+2. **Instale as dependências:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+3. **Inicie o servidor de desenvolvimento:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   npm start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Acesse o aplicativo:**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   Caso não abra automaticamente, no seu navegador acesse `http://localhost:3000`.
 
-### `npm run eject`
+## Instruções de Uso
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+O aplicativo permite que você gerencie tarefas com as seguintes funcionalidades:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Criar uma nova tarefa:** Utilize o formulário na interface principal.
+2. **Visualizar a lista de tarefas:** Todas as tarefas criadas são listadas na interface principal.
+3. **Editar uma tarefa:** Clique no ícone de edição em uma tarefa existente para editá-la.
+4. **Excluir uma tarefa:** Clique no ícone de lixeira em uma tarefa para excluí-la.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Dependências
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Este frontend usa as seguintes principais tecnologias:
 
-## Learn More
+- React
+- TypeScript
+- Material-UI
+- Axios
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contato
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Para mais informações, entre em contato com [Matheus](mailto:matheusfpalma@hotmail.com).

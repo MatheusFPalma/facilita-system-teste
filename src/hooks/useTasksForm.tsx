@@ -12,7 +12,7 @@ const useTaskForm = (initialState: { title: string; description?: string }) => {
 
     const handleSubmit = async (callback: (formData: typeof formState) => void) => {
         callback(formState);
-        setFormState({ title: '', description: '' }); // Reset form after submission
+        setFormState({ title: '', description: '' });
     };
 
     return {

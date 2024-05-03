@@ -1,47 +1,40 @@
 import React from 'react';
-import useTaskForm from '../hooks/useTasksForm';
+import TaskItem from './TaskItem';
+import { Box } from '@mui/material';
 
-interface TaskFormProps {
-    initialData?: { id?: string; title: string; description?: string };
-    onSubmit: (taskData: { title: string; description: string }) => void;
+interface Task {
+    id: string;
+    title: string;
+    description?: string;
 }
 
-const TaskForm: React.FC<TaskFormProps> = ({ initialData = { title: '', description: '' }, onSubmit }) => {
-    const { formState, handleChange, handleSubmit } = useTaskForm(initialData);
+interface TaskListProps {
+    tasks: Task[];
+    onEdit: (id: string) => void;
+    onDelete: (id: string) => void;
+}
 
-    const submitForm = () => {
-        const taskData = {
-            title: formState.title,
-            description: formState.description || ''
-        };
-        onSubmit(taskData);
-    };
-
+const TaskList: React.FC<TaskListProps> = ({ tasks, onEdit, onDelete }) => {
     return (
-        <form onSubmit={(e) => { e.preventDefault(); handleSubmit(submitForm); }}>
-            <div>
-                <label htmlFor="title">Title:</label>
-                <input
-                    id="title"
-                    name="title"
-                    type="text"
-                    value={formState.title}
-                    onChange={handleChange}
-                    required
+        <Box
+            sx={{
+                height: '300px',
+                overflowY: 'auto',
+                padding: 2,
+                boxShadow: 1,
+                borderRadius: 1,
+            }}
+        >
+            {tasks.map((task) => (
+                <TaskItem
+                    key={task.id}
+                    task={task}
+                    onEdit={() => onEdit(task.id)}
+                    onDelete={() => onDelete(task.id)}
                 />
-            </div>
-            <div>
-                <label htmlFor="description">Description:</label>
-                <textarea
-                    id="description"
-                    name="description"
-                    value={formState.description}
-                    onChange={handleChange}
-                />
-            </div>
-            <button type="submit">Save Task</button>
-        </form>
+            ))}
+        </Box>
     );
 };
 
-export default TaskForm;
+export default TaskList;
